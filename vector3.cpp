@@ -8,7 +8,9 @@ namespace l2
 
   Vector3::Vector3()
   {
-    memset(v.buffer, 0, sizeof(Vector3::internal_representation));
+    v.buffer[0] = 0;
+    v.buffer[1] = 0;
+    v.buffer[2] = 0;
   }
 
   Vector3::Vector3(double x, double y, double z)
