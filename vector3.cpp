@@ -22,7 +22,6 @@ namespace l2
   {
     return sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
   }
-
   void Vector3::mul(double a)
   {
     v.x *= a;
