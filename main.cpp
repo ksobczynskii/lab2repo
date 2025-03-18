@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "vector3.hpp"
 
 using namespace l2;
@@ -34,6 +35,46 @@ int main()
     std::cout << "STAGE 2 and 3" << std::endl;
 
     const int array_size = 10;
+    {
+        Vector3 auto_tab[array_size];
+
+        for (int i = 0; i < array_size; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                auto_tab[i].v.buffer[j] = static_cast<double>(i);
+            }
+            std::cout << "Adres " << 1 << "-tego elementu tablicy automatycznej " << std::hex << &(auto_tab[0]) << std::endl;
+        }
+        for (const Vector3 &v : auto_tab)
+            std::cout << v.length() << std::endl;
+    }
+    {
+        Vector3 *dynamic_tab = new Vector3[array_size];
+        for (int i = 0; i < array_size; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                dynamic_tab[i].v.buffer[j] = static_cast<double>(i);
+            }
+            std::cout << "Adres " << 1 << "-tego elementu tablicy dynamicznej " << std::hex << &(dynamic_tab[0]) << std::endl;
+        }
+
+        for (int i = 0; i < array_size; ++i)
+            std::cout << dynamic_tab[i].length() << std::endl;
+        // delete[] dynamic_tab;
+    }
+    {
+        std::vector<Vector3> vector_tab;
+        for (int i = 0; i < array_size; i++)
+        {
+            Vector3 toadd(i, i, i);
+            vector_tab.push_back(toadd);
+            // vector_tab.emplace_back(i, i, i); // bo nie mam zainicjalizowanego sizu wektora wiec pushe de facto pushbackowac ale emplace_back dziala git
+            std::cout << "Adres " << 1 << "-tego elementu tablicy std::vector " << std::hex << &(vector_tab[0]) << std::endl;
+        }
+    }
+
     // STAGE 2: stack, heap and std::vector
 
     std::cout << "STAGE 4" << std::endl;
